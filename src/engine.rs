@@ -175,11 +175,13 @@ where
                 let mut event_stream = collector.get_event_stream().await.unwrap();
 
                 while let Some(event) = event_stream.next().await {
+                    println!("while是否执行了");
                     if let Err(e) = event_sender.send(event) {
                         error!(name = collector.name(), "error sending event: {e:#}");
+                        println!("发生了错误");
                     }
                 }
-
+                println!("collecotr ended ");
                 error!(name = collector.name(), "event stream ended!");
             });
         }

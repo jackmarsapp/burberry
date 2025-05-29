@@ -171,9 +171,10 @@ where
             let event_sender = event_sender.clone();
 
             set.spawn(async move {
+                println!("collector1");
                 debug!(name = collector.name(), "starting collector... ");
                 let mut event_stream = collector.get_event_stream().await.unwrap();
-
+                println!("collector2");
                 while let Some(event) = event_stream.next().await {
                     println!("while是否执行了");
                     if let Err(e) = event_sender.send(event) {
